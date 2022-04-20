@@ -9,7 +9,7 @@ const Board = (props) => {
   const [mineCount, setMineCount] = useState(props.mines);// mine flagged
   const [gameStatus, setGemeStatus] = useState('Game in progress');// (Game in progess, won, lose)
   
-  console.log(boardData);
+  
 // Gets initial board data
   
   function initBoardData (height, width, mines) {
@@ -131,7 +131,7 @@ const Board = (props) => {
       mines++;
     } else {
       updatedData[x][y].isFlagged = true;
-      mines--;
+      mines > 0 && --mines;
     }
 
     if (mines === 0) {
@@ -168,7 +168,7 @@ const Board = (props) => {
 
   function handleCellClick(x, y) {
   
-    console.log('render4');
+    
     let updatedData = [...boardData];
     let game = gameStatus;
     let mine = mineCount;
@@ -180,9 +180,9 @@ const Board = (props) => {
     updatedData[x][y].isFlagged = false;
     updatedData[x][y].isRevealed = true;
 
-    if (updatedData[x][y].isEmpty || updatedData[x][y].neighbour) {
+    if (updatedData[x][y].isEmpty ) {
       updatedData = revealEmpty(x, y, updatedData);
-      console.log(updatedData);
+      // console.log(updatedData);
     }
     
 

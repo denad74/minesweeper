@@ -3,16 +3,27 @@ import React from 'react';
 
 const Cell = ({value,onClick, cMenu}) => {
  
+  let  className =
+      `cell
+      ${value.isRevealed  ? '' : " hidden" }
+      ${(value.isMine ? " is-mine" : " ")};
+      ${value.isFlagged ? " is-flag" : " "}`
   
   const getValue = () => {
     
     if (!value.isRevealed) {
-      return value.isFlagged ? "🚩" : null;
+      return value.isFlagged ? "🚩"  : null;
     }
+
+    if (value.isFlagged) {
+      return "🚩"
+    }
+
     if (value.isMine) {
       return "💣";
 
     }
+
     if (value.neighbour === 0) {
       return null;
     }
@@ -20,12 +31,7 @@ const Cell = ({value,onClick, cMenu}) => {
   }
   
 
- let  className =
-      `cell
-      ${value.isRevealed  ? '' : " hidden" }
-      ${(value.isMine ? " is-mine" : " ")};
-      ${value.isFlagged ? " is-flag" : " "}`
-  
+ 
 
     return (
       <div 
